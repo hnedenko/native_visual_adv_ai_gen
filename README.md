@@ -4,3 +4,5 @@ Native Visual Advertisement AI-Gen is a comprehensive solution for generating co
 The key innovation is an integrated creative management module that enables dynamic and measurable adjustments to the security risk of various brands using censorship levels from 0 to 1 (noise reduction level).
 
 The system is deployed via an API and is demonstrated through the Telegram frontend.
+
+@news_native_visual_adv_bot
