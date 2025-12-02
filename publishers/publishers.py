@@ -16,7 +16,7 @@ class Publishers:
         files_only = [item for item in all_items if os.path.isfile(os.path.join(folder_path, item))]
 
 
-        # get dsts about each publisher
+        # get data about each publisher
         all_publishers = list()
         for publisher in files_only:
             with open(folder_path + '/' + publisher, 'r', encoding='utf-8') as file:
@@ -25,7 +25,6 @@ class Publishers:
 
         # filter publisher by not empty info
         # TODO: delete this, add into to each publisher
-        publishers = list()
         for publisher in all_publishers:
             if publisher != {}:
-                publishers.append(publisher)
+                self.publishers.append(publisher)
