@@ -1,10 +1,8 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
-import httpx
 import os
 from config_manager import ConfigManager
 from modules.news_fetcher import NewsFetcher
-import asyncer
 
 async def start_command(update: Update, context):
     await update.message.reply_text(
