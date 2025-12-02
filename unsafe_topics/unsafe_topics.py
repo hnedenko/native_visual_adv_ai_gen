@@ -17,18 +17,9 @@ class UnsafeTopics:
 
 
         # get data about each unsafe topic
-        all_unsafe_topics = list()
         for topic in files_only:
             with open(folder_path + '/' + topic, 'r', encoding='utf-8') as file:
                 data = json.load(file)
-            all_unsafe_topics.append(data)
-
-        # filter unsafe topic by not empty info
-        # TODO: delete this, add into to each unsafe topic
-        for topic in all_unsafe_topics:
-            if topic != {}:
-                self.unsafe_topics.append(topic)
-
-        print(len(self.unsafe_topics))
+            self.unsafe_topics.append(data)
 
 ut = UnsafeTopics()
