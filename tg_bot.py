@@ -1,8 +1,10 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 import os
-from config_manager import ConfigManager
 from modules.news_fetcher import NewsFetcher
+from publishers.publishers import Publishers
+from modules.native_ad_AI_gen import NativeAdAIGen
+import random
 
 async def start_command(update: Update, context):
     await update.message.reply_text(
@@ -11,9 +13,25 @@ async def start_command(update: Update, context):
 async def any_command(update: Update, context):
 
     user_input = update.message.text
-    gnews = news_fetcher.fetch_random_topic_gnews(user_input)
 
-    await update.message.reply_text(gnews)
+    # get 1 random gnews
+    contextual_gnews = news_fetcher.fetch_random_topic_gnews(user_input)
+    await update.message.reply_text('News:\n\n'+contextual_gnews)
+
+    # get random publisher for advertising generation
+    # TODO: implement vectorization publishers and news, choose not random, but weighted and/or nearest
+    advertised_publisher = random.choice(Publishers().publishers)
+    await update.message.reply_text('Publisher:\n\n'+advertised_publisher["name"])
+
+    # advertising generation from gnews context and advertised publisher
+    native_ad_AI_gen = NativeAdAIGen()
+    response = native_ad_AI_gen.generate_ad(contextual_gnews, advertised_publisher["visual"])
+    print(response)
+    # TODO: implement image extracting from response
+
+    # TODO: implement filters logic and AI-ComfyUI
+
+    # TODO: implement regenerating image if one of filters more then threshold
 
 def main():
     from dotenv import load_dotenv
@@ -31,6 +49,5 @@ def main():
 
 if __name__ == '__main__':
     os.system('pip install -r requirements.txt')
-    config_manager = ConfigManager()
     news_fetcher = NewsFetcher()
     main()

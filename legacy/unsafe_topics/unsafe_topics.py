@@ -11,7 +11,7 @@ class UnsafeTopics:
     def load_unsafe_topics(self):
 
         # get files with unsafe topics data
-        folder_path = "./unsafe_topics"
+        folder_path = "unsafe_topics"
         all_items = os.listdir(folder_path)
         files_only = [item for item in all_items if os.path.isfile(os.path.join(folder_path, item))]
 
